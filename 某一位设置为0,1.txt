@@ -1,0 +1,15 @@
+function IsBoolean(Value: Cardinal; Index: Integer): Boolean; inline;
+var
+  I: Cardinal;
+begin
+  I := 1 shl Index;
+  Result := Value and I = I;
+end;
+
+procedure SetBoolean(var srcValue: Cardinal; Index: Integer; Value: Boolean); inline;
+begin
+  if Value then
+    srcValue := srcValue or (Cardinal(1 shl Index))
+  else
+    srcValue := srcValue and (Cardinal(1 shl Index) xor $FFFFFFFF);
+end;
